@@ -50,10 +50,7 @@ db.init_db()
 ensure_scheduler()
 
 
-# ---------- Routes ----------
-@app.get("/")
-def home():
-    return render_template_string(HTML)
+
 
 
 @app.get("/api/status")
