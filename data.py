@@ -178,7 +178,7 @@ def load_all(days, with_funding=True, force_refresh=False):
         try:
             print(f"    loading 4H {s}...")
             d = load_klines(s, days, force_refresh)
-            if len(d) < 300:
+            if len(d) < 100:
                 failed.append(s)
                 print(f"      [skip] not enough data for {s}")
                 continue
