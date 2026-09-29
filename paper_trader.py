@@ -57,7 +57,7 @@ def run_check(verbose=True) -> dict:
 
     # 1) Load recent data (14 days enough for indicators on 4H)
     try:
-        data, funding = load_all(days=30, with_funding=True, force_refresh=False)
+        data, funding = load_all(days=60, with_funding=True, force_refresh=False)
     except Exception as e:
         _log(f"  load failed: {e}")
         return {"ok": False, "error": str(e), "log": log}
