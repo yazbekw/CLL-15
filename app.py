@@ -315,11 +315,17 @@ def backtest(days: int = LOOKBACK_DAYS_DEFAULT):
         if best["forecast"] <= ROUND_TRIP_COST + 0.0015:
             continue
 
+        # Make sure next_ts exists for both legs before opening the position.
+        if next_ts not in data[best["a"]].index or next_ts not in data[best["b"]].index:
+            continue
+
         # Enter at next bar open. Store forecast as known at ts only.
         position = {
             "a": best["a"], "b": best["b"], "beta": best["beta"],
             "forecast": best["forecast"], "entry": next_ts,
             "bars": 0, "pnl": 0.0,
+            "entry_open_a": float(data[best["a"]].loc[next_ts, "open"]),
+            "entry_open_b": float(data[best["b"]].loc[next_ts, "open"]),
         }
 
     if position is not None:
